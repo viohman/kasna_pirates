@@ -42,18 +42,16 @@ def move():
     arena_state.pop(me)
 
     for pirate in arena_state:
-
-        if pirate['x'] == my_location[0] and pirate['x'] < my_location[0] and my_dir == "W":
+        if arena_state[pirate]['x'] == my_location[0] and arena_state[pirate]['x'] < my_location[0] and my_dir == "W":
             return "T"   
-        if pirate['x'] == my_location[0] and pirate['x'] > my_location[0] and my_dir == "E":
+        if arena_state[pirate]['x'] == my_location[0] and arena_state[pirate]['x'] > my_location[0] and my_dir == "E":
             return "T"
-        if pirate['y'] == my_location[1] and pirate['y'] < my_location[0] and my_dir == "S":
+        if arena_state[pirate]['y'] == my_location[1] and arena_state[pirate]['y'] < my_location[0] and my_dir == "S":
             return "T"
-        if pirate['y'] == my_location[1] and pirate['y'] > my_location[0] and my_dir == "N":
+        if arena_state[pirate]['y'] == my_location[1] and arena_state[pirate]['y'] > my_location[0] and my_dir == "N":
             return "T"
 
-         
-
+        
     return moves[random.randrange(len(moves))]
 
 
