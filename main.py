@@ -38,6 +38,7 @@ def move():
     my_location = [arena_state[me]["x"], arena_state[me]["y"]]
     my_dir = arena_state[me]["direction"]
 
+
     arena_state.pop(me)
 
     for pirate in arena_state:
