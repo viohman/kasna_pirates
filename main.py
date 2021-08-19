@@ -17,6 +17,9 @@ import os
 import logging
 import random
 from flask import Flask, request
+# from flask import Response
+# import time
+
 
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 logger = logging.getLogger(__name__)
@@ -28,12 +31,11 @@ moves = ['F', 'L', 'R']
 def move():
     request.get_data()
     logger.info(request.json)
-    logger.info("Test test test")
 
     content = request.get_json()
     me = content["_links"]["self"]["href"]
 
-    arena_dims = content["arena"]["dims"]
+    # arena_dims = content["arena"]["dims"]
     arena_state = content["arena"]["state"]
     my_location = [arena_state[me]["x"], arena_state[me]["y"]]
     my_dir = arena_state[me]["direction"]
@@ -41,31 +43,57 @@ def move():
 
     arena_state.pop(me)
 
+
+    # def generate():
+    #     for x in range(0, 2):
+    #         time.sleep(2)
+    #         yield 'T'
+
     for pirate in arena_state:
+        # if "cloudbowl-samples-python-gpcpn53b3a-uc.a.run.app" in pirate:
+        #     continue
         if arena_state[pirate]['x'] == my_location[0] and arena_state[pirate]['y'] < my_location[1] and my_dir == "N":
             if 0 < abs(my_location[1] - arena_state[pirate]['y']) <= 3:
-                return "T"
+                # def generate():
+                #     for x in range(0, 3):
+                #         yield 'T'
+                # return Response(generate()) 
+                if "cloudbowl-samples-python-gpcpn53b3a-uc.a.run.app" in pirate and me != "https://cloudbowl-samples-python-gpcpn53b3a-uc.a.run.app":
+                    return "R"  
+                return "T" 
             else:
-                return "F"    
+                return "F" 
+
         if arena_state[pirate]['x'] == my_location[0] and arena_state[pirate]['y'] > my_location[1] and my_dir == "S":
             if 0 < abs(my_location[1] - arena_state[pirate]['y']) <= 3:
+                # def generate():
+                #     for x in range(0, 3):
+                #         yield 'T'
+                # return Response(generate())  
+                if "cloudbowl-samples-python-gpcpn53b3a-uc.a.run.app" in pirate and me != "https://cloudbowl-samples-python-gpcpn53b3a-uc.a.run.app":
+                    return "L"
                 return "T"
             else:
                 return "F" 
         if arena_state[pirate]['y'] == my_location[1] and arena_state[pirate]['x'] < my_location[0] and my_dir == "W":
             if 0 < abs(my_location[0] - arena_state[pirate]['x']) <= 3:
+                # return Response(generate()) 
+                if "cloudbowl-samples-python-gpcpn53b3a-uc.a.run.app" in pirate and me != "https://cloudbowl-samples-python-gpcpn53b3a-uc.a.run.app":
+                    return "R"
                 return "T"
             else:
                 return "F" 
         if arena_state[pirate]['y'] == my_location[1] and arena_state[pirate]['x'] > my_location[0] and my_dir == "E":
             if 0 < abs(my_location[0] - arena_state[pirate]['x']) <= 3:
+                # return Response(generate())
+                if "cloudbowl-samples-python-gpcpn53b3a-uc.a.run.app" in pirate and me != "https://cloudbowl-samples-python-gpcpn53b3a-uc.a.run.app":
+                    return "L" 
                 return "T"
             else:
                 return "F" 
 
         
     return moves[random.randrange(len(moves))]
-
 
 
 
