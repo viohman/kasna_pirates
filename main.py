@@ -13,13 +13,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 import os
 import logging
 import random
 from flask import Flask, request
 # from flask import Response
 # import time
+""" Tested and failed
+1. sending streaming responses with multiple "T" to try hitting more then once per round
+2. lagging opponents with barrage of fake requests
 
+Tested and Worked
+1. creating multiple clones based on prefixed url and different revisions
+
+"""
+
+""" TO DO
+1. force the bots to let IceKing win
+2. try reinforced learning based on Q-table:
+https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part-0-q-learning-with-tables-and-neural-networks-d195264329d0
+https://gym.openai.com/envs/FrozenLake-v0/
+"""
 
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 logger = logging.getLogger(__name__)
